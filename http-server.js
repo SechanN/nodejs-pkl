@@ -5,7 +5,24 @@ const server = http.createServer((req,res) => {``
     console.log(req.url, req.method)
     res.setHeader('content-type', 'text/html');
 
-    fs.readFile('./views/index.html', (err,data) => {
+    let url = './views/'
+
+    switch(req.url) {
+        case '/':
+            url = url + 'index.html'
+            res.statusCode = 200; // status error
+        break;
+        case '/about':
+            url = url + 'about.html'
+            res.statusCode = 200;
+        break;
+        default: 
+            url += '404.html'
+            res.statusCode = 404;
+        break; 
+    }
+
+    fs.readFile(url, (err,data) => {
         if(err) {
             console.log(err)
              res.end()
