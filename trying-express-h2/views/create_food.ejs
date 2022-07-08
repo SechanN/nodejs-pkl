@@ -1,0 +1,23 @@
+<%- include('./partials/head-partials.ejs') %>
+
+<body>
+       <%- include('./partials/nav.ejs') %>
+
+       <div class="container my-5">
+
+          <form class="row g-3 needs-validation" action="/foods" method="POST">
+            <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Nama Makanan</label>
+              <input type="text" class="form-control" name="name" placeholder="Seblak..." required>
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Tentang Makanan</label>
+              <textarea class="form-control" name="tentang" rows="3"></textarea>
+            </div>
+            <div class="col-12">
+              <button class="btn btn-danger" type="submit">Submit form</button>
+            </div>
+          </form>
+       </div>
+</body>
+</html>

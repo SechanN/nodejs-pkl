@@ -1,0 +1,38 @@
+<%- include('./partials/head-partials.ejs') %>
+
+<body>
+       <%- include('./partials/nav.ejs') %>
+
+       <div class="container my-5">
+
+          <a href="/">Back</a>
+          
+          <a class="btn btn-danger delete" data-doc="<%= foodsDetail._id %>"> 
+              Delete this Food
+            </a>
+
+            <h1><%= foodsDetail.name %></h1>
+            <p><%= foodsDetail.tentang %></p>
+       </div>
+
+
+       <script>
+              const dapatDelete = document.querySelector('a.delete')
+
+              dapatDelete.addEventListener(('click'), (e) => {
+                const endpoint = `/foods/${dapatDelete.dataset.doc}`;
+
+                fetch(endpoint, {
+                  method: 'DELETE'
+                }).then((response) => window.location.href = '/')
+                .then((err) => {
+                  console.log(err)
+                })
+                .catch((err) => {
+                  console.log(err);
+                })
+                console.log('tests')
+              })
+          </script>
+</body>
+</html>
