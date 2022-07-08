@@ -18,12 +18,15 @@ mongoose.connect(uri, { useNewUrlParser:true, useUnifiedTopology: true },(err) =
 });
 
 app.get('/', (req,res) => {
-    const data = [
-        { name: "title 1", tentang: "makanan 1 sangat enak dan lezat"},
-        { name: "title 2", tentang: "makanan 2 sangat enak dan lezat"},
-        { name: "title 3", tentang: "makanan 3 sangat enak dan lezat"},
-    ]
-    res.render('index',  { title: 'Blog',data } )
+    res.redirect('/blogs')
+})
+
+app.get('/foods', (req,res) => {
+    Food.find().then((result) => { 
+        res.render('index', {title: 'Food', data: result })
+    }).catch((err) => {
+        console.log(err)
+    })
 })
 
 app.get('/about', (req,res) => {
@@ -41,16 +44,16 @@ app.get('/food/create', (req,res) => {
 })
 
 // create data manually from url
-app.get('/add/food', (req,res) => {
-    const food = new Food( { name: 'Nasi Uduk', tentang: 'Uduk enak yang nyummy' }, );
+// app.get('/add/food', (req,res) => {
+//     const food = new Food( { name: 'Nasi Uduk', tentang: 'Uduk enak yang nyummy' }, );
 
-    food.save().then((result) => { res.send(result) }).catch((err) => {res.send(err) })
-})
+//     food.save().then((result) => { res.send(result) }).catch((err) => {res.send(err) })
+// })
 
-// All Data in mongodb = json 
-app.get('/findall', (req,res) => {
-    Food.find().then((resp) => { res.send(resp) }).catch((err) => { res.send(err) })
-})
+// Getting data in mongodb = json 
+// app.get('/findall', (req,res) => {
+//     Food.find().then((resp) => { res.send(resp) }).catch((err) => { res.send(err) })
+// })
 
 app.use((req,res) => {
     res.render('404' , { title: '404 ' })
